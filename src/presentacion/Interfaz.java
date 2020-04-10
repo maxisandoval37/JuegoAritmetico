@@ -1,10 +1,21 @@
 package presentacion;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import javax.swing.*;
 
 import multimedia.Sonidos;
@@ -39,6 +50,7 @@ public class Interfaz {
     private JButton btnDificil = new JButton("Dificil");
     private JButton btnFacil = new JButton("Facil");
     private JButton btnNormal = new JButton("Normal");   
+    private JButton tutorial = new JButton("TUTORIAL");   
     //////////
     
     
@@ -62,6 +74,7 @@ public class Interfaz {
 		botonFacil();
 		botonNormal();
 		botonDificil();
+		botonTutorial();
 		fondo();
 		
 		//Sonidos.sonidoInterfaz();
@@ -121,6 +134,31 @@ public class Interfaz {
 		});
 		btnDificil.setBounds(430, 303, 89, 23);
 		frame.getContentPane().add(btnDificil);
+	}
+	
+	private void botonTutorial() {
+		tutorial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+		        URL url=null;
+		        try {
+		            url = new URL("https://youtu.be/rvXVHrIsL3g");
+		            try {
+		                Desktop.getDesktop().browse(url.toURI());
+		            } catch (IOException e1) {
+		                e1.printStackTrace();
+		            } catch (URISyntaxException e1) {
+		                e1.printStackTrace();
+		            }
+		        } catch (MalformedURLException e2) {
+		            e2.printStackTrace();
+		        }
+				
+				
+			}
+		});
+		tutorial.setBounds(430, 150, 100, 23);
+		frame.getContentPane().add(tutorial);
 	}
     
     private void determinarPosicionDeLasSuma(int xFila,int yFila,int xColu,int yColu) {
