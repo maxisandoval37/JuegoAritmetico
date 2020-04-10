@@ -1,8 +1,6 @@
 package presentacion;
 
-
 import java.awt.EventQueue;
-
 
 public class Main_TP1 {
 	
@@ -19,7 +17,5 @@ public class Main_TP1 {
 	                }
 	            }
 	        });
-	        
-
 	    }
 }

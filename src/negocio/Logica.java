@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashMap;
 
+
 public class Logica {
 
 	
@@ -100,6 +101,7 @@ public class Logica {
 			archivoEscritura.close();
 
 			tiempoRecord = recordnuevo;
+			System.out.println(tiempoRecord);
 
 		} catch (Exception e2) {
 			throw new RuntimeException("Error al guardar el record");
@@ -114,3 +116,4 @@ public class Logica {
 	
 	
 }
+

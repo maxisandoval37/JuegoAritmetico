@@ -19,6 +19,8 @@ import negocio.Logica;
 
 public class Interfaz {
  
+
+	 
 	public JFrame frame; 
 	private Timer time;
 	
@@ -47,7 +49,8 @@ public class Interfaz {
     private JButton btnDificil = new JButton("Dificil");
     private JButton btnFacil = new JButton("Facil");
     private JButton btnNormal = new JButton("Normal");   
-    private JButton tutorial = new JButton("TUTORIAL");   
+    private JButton tutorial = new JButton("TUTORIAL"); 
+    private JButton btnReiniciar = new JButton("Reiniciar");
     //////////
     
     
@@ -134,6 +137,7 @@ public class Interfaz {
 	}
 	
 	private void botonTutorial() {
+		
 		tutorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -154,7 +158,7 @@ public class Interfaz {
 				
 			}
 		});
-		tutorial.setBounds(430, 150, 100, 23);
+		tutorial.setBounds(422, 170, 100, 23);
 		frame.getContentPane().add(tutorial);
 	}
     
@@ -179,6 +183,7 @@ public class Interfaz {
     	limitarInputUsuario();
     	botonComenzar();
     	creartiempo();
+    	botonReiniciar();
     	
         botonRendir();
         dibujarSumaColu();
@@ -189,7 +194,7 @@ public class Interfaz {
         botonProbar();
         crearTimer();
         fondo();
-		
+        
     }
     
     
@@ -204,6 +209,8 @@ public class Interfaz {
 		btnComenzar.setVisible(true);
 		btnRendir.setVisible(true);
 		btnProbar.setVisible(true);
+		btnReiniciar.setVisible(true);
+		tutorial.setVisible(false);
 	}
 
 	
@@ -426,7 +433,7 @@ public class Interfaz {
 	private void mostrarMejorTiempo() {
 		lblMejorTiempo = new JLabel("Mejor tiempo : " + Logica.tiempoRecord);
 		lblMejorTiempo.setFont(new Font("Tahoma",Font.BOLD,20));
-		lblMejorTiempo.setBounds(70,200,300,100);
+		lblMejorTiempo.setBounds(320,10,300,100);
 		lblMejorTiempo.setForeground(Color.WHITE);
 		frame.getContentPane().add(lblMejorTiempo);
 	}
@@ -436,6 +443,41 @@ public class Interfaz {
 		imagenFondo.setIcon(new ImageIcon(Interfaz.class.getResource("/presentacion/FONDO.png")));
 		imagenFondo.setBounds(0, 0, 567, 353);
 		frame.getContentPane().add(imagenFondo);
+	}
+	
+	private void botonReiniciar() { //////
+		btnReiniciar.setVisible(false);
+		btnReiniciar.addActionListener(new ActionListener() {       	
+            public void actionPerformed(ActionEvent e) { 
+            
+            	for (int i = 0; i < constanteEsquina; i++) {
+        			for (int j = 0; j < constanteEsquina; j++) {
+        				cuadrilla[i][j].setVisible(false);
+        			}
+        		}
+            	
+            	for (int i = 0; i < constanteEsquina; i++) {
+            		LabelSumaColu[i].setVisible(false);
+            		LabelSumaFila[i].setVisible(false);
+            	}
+            	labelPuntos.setVisible(false);
+        		lblTiempo.setVisible(false);
+        		btnComenzar.setVisible(false);
+        		btnRendir.setVisible(false);
+        		btnProbar.setVisible(false);
+        		btnReiniciar.setVisible(false);
+        		lblMejorTiempo.setVisible(false);
+        		
+        		btnDificil.setVisible(true);
+        		btnFacil.setVisible(true);
+        		btnNormal.setVisible(true);
+        		labelPuntos.setText(".....");
+        		setTiempoActual(0);
+        		time.stop();
+                }
+        });
+		btnReiniciar.setBounds(420, 200, 106, 23);
+        frame.getContentPane().add(btnReiniciar);
 	}
 	
 
@@ -452,8 +494,9 @@ public class Interfaz {
 				if (time.isRunning()) {
 					if (comprobarVictoria()) {
 						for (int i = 0; i < constanteEsquina; i++) {
-							pintarFila(i);
-							pintarColu(i);
+							
+							pintarColu(i,Color.GREEN);
+							pintarFila(i,Color.GREEN);
 						}
 						time.stop();
 					} else {
@@ -461,17 +504,17 @@ public class Interfaz {
 
 						for (int i = 0; i < constanteEsquina; i++) {
 							if (comprobarFila(i)) {
-								pintarFila(i);
+								pintarFila(i,Color.GREEN);
 							}
 							else {
-								LabelSumaFila[i].setForeground(Color.WHITE);
+								pintarFila(i,Color.WHITE);
 							}
 
 							if (comprobarColumna(i)) {
-								pintarColu(i);
+								pintarColu(i,Color.GREEN);
 							}
 							else {
-								LabelSumaColu[i].setForeground(Color.WHITE);
+								pintarColu(i,Color.WHITE);
 							}
 						  }						
 
@@ -485,12 +528,12 @@ public class Interfaz {
 		});
 	}
 	
-	private void pintarFila(int fila) {
-		LabelSumaFila[fila].setForeground(Color.GREEN);;
+	private void pintarFila(int fila,Color f) {
+		LabelSumaFila[fila].setForeground(f);;
 	}
 	
-	private void pintarColu(int columna) {
-		LabelSumaColu[columna].setForeground(Color.GREEN);
+	private void pintarColu(int columna, Color c) {
+		LabelSumaColu[columna].setForeground(c);
 	}
 	
 	private boolean comprobarVictoria() {// COMPRUEBA SI TODOS LOS TEXTFIELD SON VERDES
