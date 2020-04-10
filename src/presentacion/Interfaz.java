@@ -457,6 +457,7 @@ public class Interfaz {
 						}
 						time.stop();
 					} else {
+						setTiempoActual(tiempoActual+10);
 
 						for (int i = 0; i < constanteEsquina; i++) {
 							if (comprobarFila(i)) {
