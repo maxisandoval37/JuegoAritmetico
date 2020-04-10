@@ -35,6 +35,7 @@ public class Interfaz {
     private JLabel labelPuntos = new JLabel(".....");
     private JLabel imagenFondo = new JLabel("");
     private JLabel lblTiempo = new JLabel("Tiempo");
+    private JLabel lblMejorTiempo; 
 
     private int constanteXsumaFila=0;
     private int constanteYsumaFila=0;
@@ -188,6 +189,7 @@ public class Interfaz {
         dibujarSumaFila();
     
         labelPuntos();
+        mostrarMejorTiempo();
         botonProbar();
         crearTimer();
         fondo();
@@ -207,6 +209,9 @@ public class Interfaz {
 		btnRendir.setVisible(true);
 		btnProbar.setVisible(true);
 	}
+
+	
+
     
     private void creartiempo() {
         lblTiempo.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -421,6 +426,15 @@ public class Interfaz {
 		frame.getContentPane().add(labelPuntos);
 	}
 
+
+	private void mostrarMejorTiempo() {
+		lblMejorTiempo = new JLabel("Mejor tiempo : " + Logica.tiempoRecord);
+		lblMejorTiempo.setFont(new Font("Tahoma",Font.BOLD,20));
+		lblMejorTiempo.setBounds(70,200,300,100);
+		lblMejorTiempo.setForeground(Color.WHITE);
+		frame.getContentPane().add(lblMejorTiempo);
+	}
+
 	
 	private void fondo() {
 		imagenFondo.setIcon(new ImageIcon(Interfaz.class.getResource("/presentacion/FONDO.png")));
@@ -437,7 +451,7 @@ public class Interfaz {
 		btnProbar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Sonidos.sonidoBoton();
-				// Logica.compararRecords(tiempoActual);
+				Logica.compararRecords(tiempoActual);
 
 				if (time.isRunning()) {
 					if (comprobarVictoria()) {

@@ -16,7 +16,7 @@ public class Logica {
 	
 	public static HashMap<Integer,Integer> filas = new HashMap<Integer,Integer>();//<POSICION,SUMA>
 	public static HashMap<Integer,Integer> columnas = new HashMap<Integer,Integer>();//<POSICION,SUMA>
-	private static String rutaDelFichero;
+	
 	private static String tiempoRecord;
 	
 	//GENERA UN N RANDOM, CON DETERMINADAS CONDICIONES
@@ -71,45 +71,42 @@ public class Logica {
 	//ABRIR Y GUARDAR MEJOR TIEMPO (FALTA MOSTRARLO EN PANTALLA)
 	
 	public static void abrirArchivoRecord() {
-		
-		java.net.URL url =Logica.class.getResource("/negocio/listaRecords.txt"); 
-		File file = new File(url.getPath()); 
-		
-		//rutaDelFichero = "/negocio/listaRecords.txt";
-		
-		//File records = new File(rutaDelFichero);
-		FileReader fr;
+		InputStream entrada = Logica.class.getResourceAsStream("listaRecords.txt");
+
 		try {
-			fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
+			Reader lectura = new InputStreamReader(entrada, "utf-8");
+			BufferedReader leer = new BufferedReader(lectura);
+
 			String linea;
-			while ((linea = br.readLine()) != null) {
+			while ((linea = leer.readLine()) != null) {
 				tiempoRecord = linea;
 			}
-			br.close();
+			lectura.close();
+			entrada.close();
+			leer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public static void guardarRecords(String recordnuevo) {
+		File archivotxt = new File("src/negocio/listaRecords.txt");
+
 		try {
-			//BufferedWriter bw = new BufferedWriter(new FileWriter(rutaDelFichero));
-			java.net.URL url = Logica.class.getResource("/negocio/listaRecords.txt");
-			
-			BufferedWriter bw = new BufferedWriter(new FileWriter(url.toString()));
-			
-			bw.write("");
-			bw.close();
-			File archivo = new File(url.getPath());
-			FileWriter escribir = new FileWriter(archivo, true);
-			escribir.write(recordnuevo);
-			escribir.write("\r\n");
-			escribir.close();
+
+			FileWriter archivoEscritura = new FileWriter(archivotxt);
+			BufferedWriter escritura = new BufferedWriter(archivoEscritura);
+			escritura.write(recordnuevo);
+			escritura.close();
+			archivoEscritura.close();
+
 			tiempoRecord = recordnuevo;
+			System.out.println(tiempoRecord);
 
 		} catch (Exception e2) {
-			System.out.println("Error al copiar el record");
+			throw new RuntimeException("Error al guardar el record");
 		}
 	}
 	
