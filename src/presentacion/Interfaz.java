@@ -29,7 +29,7 @@ public class Interfaz {
 	private int constanteEsquina=5;
 	private int tiempoActual = 0;
 	
-	private JTextField[][] cuadrilla =new JTextField[constanteEsquina][constanteEsquina];
+    private JTextField[][] cuadrilla =new JTextField[constanteEsquina][constanteEsquina];
     private JLabel[] LabelSumaFila = new JLabel[constanteEsquina];
     private JLabel[] LabelSumaColu = new JLabel[constanteEsquina];
     private JLabel labelPuntos = new JLabel(".....");
@@ -441,18 +441,31 @@ public class Interfaz {
 
 				if (time.isRunning()) {
 					if (comprobarVictoria()) {
+						for (int i = 0; i < constanteEsquina; i++) {
+							pintarFila(i);
+							pintarColu(i);
+						}
 						time.stop();
 					} else {
 
-						setTiempoActual(getTiempoActual() + 10);
 						for (int i = 0; i < constanteEsquina; i++) {
 							if (comprobarFila(i)) {
 								pintarFila(i);
+							}
+							else {
+								LabelSumaFila[i].setForeground(Color.WHITE);
 							}
 
 							if (comprobarColumna(i)) {
 								pintarColu(i);
 							}
+							else {
+								LabelSumaColu[i].setForeground(Color.WHITE);
+							}
+						  }						
+
+
+
 						}
 					}
 				}
@@ -462,15 +475,11 @@ public class Interfaz {
 	}
 	
 	private void pintarFila(int fila) {
-		for(int i=0;i<constanteEsquina;i++) {
-			cuadrilla[fila][i].setBackground(Color.GREEN);
-		}
+		LabelSumaFila[fila].setForeground(Color.GREEN);;
 	}
 	
 	private void pintarColu(int columna) {
-		for(int i=0;i<constanteEsquina;i++) {
-			cuadrilla[i][columna].setBackground(Color.GREEN);
-		}
+		LabelSumaColu[columna].setForeground(Color.GREEN);
 	}
 	
 	private boolean comprobarVictoria() {// COMPRUEBA SI TODOS LOS TEXTFIELD SON VERDES
