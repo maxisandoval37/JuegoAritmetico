@@ -5,9 +5,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 
 import javax.print.DocFlavor.URL;
+
+import org.omg.CORBA.portable.InputStream;
 
 import presentacion.Interfaz;
 
@@ -17,7 +21,7 @@ public class Logica {
 	public static HashMap<Integer,Integer> filas = new HashMap<Integer,Integer>();//<POSICION,SUMA>
 	public static HashMap<Integer,Integer> columnas = new HashMap<Integer,Integer>();//<POSICION,SUMA>
 	
-	private static String tiempoRecord;
+	public static String tiempoRecord;
 	
 	//GENERA UN N RANDOM, CON DETERMINADAS CONDICIONES
 	public int crear_n_Random() {
@@ -71,7 +75,7 @@ public class Logica {
 	//ABRIR Y GUARDAR MEJOR TIEMPO (FALTA MOSTRARLO EN PANTALLA)
 	
 	public static void abrirArchivoRecord() {
-		InputStream entrada = Logica.class.getResourceAsStream("listaRecords.txt");
+		java.io.InputStream entrada = Logica.class.getResourceAsStream("listaRecords.txt");
 
 		try {
 			Reader lectura = new InputStreamReader(entrada, "utf-8");
@@ -103,7 +107,6 @@ public class Logica {
 			archivoEscritura.close();
 
 			tiempoRecord = recordnuevo;
-			System.out.println(tiempoRecord);
 
 		} catch (Exception e2) {
 			throw new RuntimeException("Error al guardar el record");
@@ -118,4 +121,3 @@ public class Logica {
 	
 	
 }
-
