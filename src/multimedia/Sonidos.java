@@ -13,7 +13,7 @@ public class Sonidos {
 	{
 		try {
            Clip sonido = AudioSystem.getClip();
-           File a = new File("C:\\Users\\Pixel\\Desktop\\TP NUEVO TOMY =)\\TP NUEVO TOMY =)\\TP1\\sonidoInterfaz.wav");
+           File a = new File("src/multimedia/sonidoInterfaz.wav");
            sonido.open(AudioSystem.getAudioInputStream(a));         
            sonido.start();          
            sonido.loop(10);
@@ -26,7 +26,7 @@ public class Sonidos {
 	{
 		try {
            Clip sonido = AudioSystem.getClip();
-           File a = new File("C:\\Users\\Pixel\\Desktop\\TP NUEVO TOMY =)\\TP NUEVO TOMY =)\\TP1\\SonidoBoton.wav");
+           File a = new File("src/multimedia/sonidoBoton.wav");
            sonido.open(AudioSystem.getAudioInputStream(a));         
            sonido.start();          
          } catch (Exception tipoError) {
