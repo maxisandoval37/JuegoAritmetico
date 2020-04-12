@@ -83,9 +83,7 @@ public class Interfaz {
 				Sonidos.sonidoBoton();
 
 				constanteEsquina = 3;
-				
 				determinarPosicionDeLasSuma(185,50,50,185);
-				
 				crear();
 				ocultarBotones();
 				mostrarTodo();
@@ -101,10 +99,9 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent e) {
 				Sonidos.sonidoBoton();
 				constanteEsquina = 4;
-				
+		
 				determinarPosicionDeLasSuma(230,50,50,230);
 				crear();
-				
 				ocultarBotones();
 				mostrarTodo();
 
@@ -121,7 +118,6 @@ public class Interfaz {
 				constanteEsquina = 5;
 				
 				determinarPosicionDeLasSuma(275,50,50,275);
-				
 				crear();
 				ocultarBotones();
 				mostrarTodo();
@@ -131,8 +127,6 @@ public class Interfaz {
 		frame.getContentPane().add(btnDificil);
 	}
 	
-
-    
     private void determinarPosicionDeLasSuma(int xFila,int yFila,int xColu,int yColu) {
         constanteXsumaFila=xFila;
         constanteYsumaFila=yFila;
@@ -145,8 +139,8 @@ public class Interfaz {
 		btnDificil.setVisible(false);
 		btnFacil.setVisible(false);
 		btnNormal.setVisible(false);
-    	
     }
+    
     private void crear() {
     	dibujarCuadrilla();
     	almacenarSumas();
@@ -180,13 +174,10 @@ public class Interfaz {
 		tutorial.setVisible(false);
 		cambiarImagen(new ImageIcon(Interfaz.class.getResource("/presentacion/FONDO.png")));
 	}
-
-	
-
     
     private void creartiempo() {
         lblTiempo.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblTiempo.setBounds(373, 80, 89, 40);
+        lblTiempo.setBounds(373, 120, 89, 40);
         lblTiempo.setForeground(Color.WHITE);
         frame.getContentPane().add(lblTiempo);
         lblTiempo.setVisible(false);
@@ -220,7 +211,6 @@ public class Interfaz {
 	
 
 	private void almacenarSumas() {
-
 		int numFila = 0;
 		int numColu = 1;
 
@@ -228,7 +218,6 @@ public class Interfaz {
 			for (int j = 0; j < constanteEsquina; j++) {
 				
 				if (j % constanteEsquina == 0) { 
-
 					// AGREGA LA SUMA DE LAS FILAS AL MAP
 					numFila++;
 					Logica.getFilas().put(numFila, Integer.parseInt(cuadrilla[i][j].getName()));
@@ -238,14 +227,12 @@ public class Interfaz {
 					Logica.calcularSumaColu(numColu, Integer.parseInt(cuadrilla[i][j].getName()));
 					
 				} else {
-
 					// AGREGA LA SUMA DE LAS FILAS AL MAP
 					Logica.calcularSumaFila(numFila, Integer.parseInt(cuadrilla[i][j].getName()));
 
 					// AGREGA LA SUMA DE LAS COLU AL MAP
 					numColu++;
 					Logica.calcularSumaColu(numColu, Integer.parseInt(cuadrilla[i][j].getName()));
-					
 				}
 			}
 		}
@@ -348,7 +335,7 @@ public class Interfaz {
  
     
 	//        INICIO BOTONES
-    
+
 	private void botonTutorial() {
 
 		tutorial.addActionListener(new ActionListener() {
@@ -356,7 +343,7 @@ public class Interfaz {
 
 				URL url = null;
 				try {
-					url = new URL("https://youtu.be/u6-8wJ5Rvx8");
+					url = new URL("https://youtu.be/ARYf7cvr4YQ");
 					try {
 						Desktop.getDesktop().browse(url.toURI());
 					} catch (IOException e1) {
@@ -406,16 +393,14 @@ public class Interfaz {
 				   cuadrilla[i][j].setText(cuadrilla[i][j].getName());
 				   cuadrilla[i][j].setBackground(Color.RED);
 				}
-
 				time.stop();
 			}
 		}
 	}
-
 	
 	private void labelPuntos() {
 		labelPuntos.setFont(new Font("Tahoma", Font.BOLD, 22));
-		labelPuntos.setBounds(393, 114, 55, 53);
+		labelPuntos.setBounds(393, 140, 55, 53);
 		labelPuntos.setForeground(Color.WHITE);
 		frame.getContentPane().add(labelPuntos);
 	}
@@ -424,7 +409,7 @@ public class Interfaz {
 	private void mostrarMejorTiempo() {
 		lblMejorTiempo = new JLabel("Mejor tiempo : " + Logica.tiempoRecord);
 		lblMejorTiempo.setFont(new Font("Tahoma",Font.BOLD,20));
-		lblMejorTiempo.setBounds(320,10,300,100);
+		lblMejorTiempo.setBounds(320,30,300,100);
 		lblMejorTiempo.setForeground(Color.WHITE);
 		frame.getContentPane().add(lblMejorTiempo);
 	}
@@ -467,7 +452,7 @@ public class Interfaz {
         		time.stop();
                 }
         });
-		btnReiniciar.setBounds(420, 200, 106, 23);
+		btnReiniciar.setBounds(420, 240, 106, 23);
         frame.getContentPane().add(btnReiniciar);
 	}
 	
@@ -479,6 +464,7 @@ public class Interfaz {
 
 		btnProbar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				pantallaJugadorGana();
 				Sonidos.sonidoBoton();
 				Logica.compararRecords(tiempoActual);
 
@@ -545,6 +531,22 @@ public class Interfaz {
 			suma = Logica.sumaNumeros(suma, imput/10);
 		}
 		return Logica.equalsNumeros(suma, Integer.parseInt(LabelSumaColu[columna].getText()));
+	}
+	
+	private void pantallaJugadorGana() {
+		if (comprobarVictoria()) {
+			cambiarImagen(new ImageIcon(Interfaz.class.getResource("/presentacion/FIN.png")));
+			btnComenzar.setVisible(false);
+			btnRendir.setVisible(false);
+			btnProbar.setVisible(false);
+			for (int i = 0; i < constanteEsquina; i++) {
+				LabelSumaColu[i].setVisible(false);
+				LabelSumaFila[i].setVisible(false);
+				for (int j = 0; j < constanteEsquina; j++) {
+					cuadrilla[i][j].setVisible(false);
+				}
+			}
+		}
 	}
 
 }

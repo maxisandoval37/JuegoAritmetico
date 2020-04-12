@@ -28,7 +28,7 @@ public class Logica {
 	}
 
 	//SUMA POR COLUMNAS Y AGREGA EL RESULTADO AL MAP
-	public static void calcularSumaColu(int numColu, int sumar) {// deberia retornar la suma, despues corregir
+	public static void calcularSumaColu(int numColu, int sumar) {
 		if (columnas.containsKey(numColu)) {
 			int sumaAuxColu = columnas.get(numColu);
 		columnas.put(numColu, sumaAuxColu + sumar);
@@ -52,19 +52,13 @@ public class Logica {
 		Logica.columnas = columnas;
 	}
 	
-	
-	
 	public static boolean equalsNumeros (int a, int b) {
 		return a==b;
 	}
 	
-	
-	
 	public static int sumaNumeros (int a, int b) {
 		return a+b;
 	}
-	
-	
 	
 	//ABRIR Y GUARDAR MEJOR TIEMPO (FALTA MOSTRARLO EN PANTALLA)
 	
@@ -84,9 +78,7 @@ public class Logica {
 			leer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		
+		}	
 	}
 	
 	public static void guardarRecords(String recordnuevo) {
@@ -111,9 +103,7 @@ public class Logica {
 	public static void compararRecords (int tiempoActual) {
 		if (Integer.parseInt(tiempoRecord) > (tiempoActual-1))
 			guardarRecords(Integer.toString(tiempoActual-1));
-
 	}
-	
 	
 }
 
