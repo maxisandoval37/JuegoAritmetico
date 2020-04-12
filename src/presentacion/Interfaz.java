@@ -378,32 +378,20 @@ public class Interfaz {
 
 	private void botonRendir() {
 		btnRendir.setVisible(false);
-        btnRendir.addActionListener(new ActionListener() {       	
-            public void actionPerformed(ActionEvent e) {
-            	if(time.isRunning()) {
-            	btnProbar.setVisible(false);
-            	Sonidos.sonidoBoton();
-            	rendirseYmostrarResolucion();
-            	btnRendir.setVisible(false);
-            	}
-
-                }
-        });
-        btnRendir.setBounds(420, 303, 106, 23);
-        frame.getContentPane().add(btnRendir);
+		btnRendir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (time.isRunning()) {
+					btnProbar.setVisible(false);
+					Sonidos.sonidoBoton();
+					rendirseYmostrarResolucion();
+					btnRendir.setVisible(false);
+				}
+			}
+		});
+		btnRendir.setBounds(420, 303, 106, 23);
+		frame.getContentPane().add(btnRendir);
 	}
 	
-	private void rendirseYmostrarResolucion() {
-		if (time.isRunning()) {
-			for (int i = 0; i < constanteEsquina; i++) {
-				for (int j = 0; j < constanteEsquina; j++) {
-				   cuadrilla[i][j].setText(cuadrilla[i][j].getName());
-				   cuadrilla[i][j].setBackground(colorRosa);
-				}
-				time.stop();
-			}
-		}
-	}
 	
 	private void labelPuntos() {
 		labelPuntos.setFont(new Font("Tahoma", Font.BOLD, 22));
@@ -465,10 +453,6 @@ public class Interfaz {
         frame.getContentPane().add(btnReiniciar);
 	}
 	
-
-	
-	
-	
 	private void botonProbar() {
 		btnProbar.setVisible(false);
 		btnProbar.setBounds(266, 303, 89, 23);
@@ -517,6 +501,18 @@ public class Interfaz {
 		LabelSumaColu[columna].setForeground(c);
 	}
 	
+	private void rendirseYmostrarResolucion() {
+		if (time.isRunning()) {
+			for (int i = 0; i < constanteEsquina; i++) {
+				for (int j = 0; j < constanteEsquina; j++) {
+				   cuadrilla[i][j].setText(cuadrilla[i][j].getName());
+				   cuadrilla[i][j].setBackground(colorRosa);
+				}
+				time.stop();
+			}
+		}
+	}
+	
 	private boolean comprobarVictoria() {// COMPRUEBA SI TODAS LAS COLUMNAS Y FILAS SON CORRECTAS
         boolean ret = true;
         for (int i = 0; i < constanteEsquina; i++) {
@@ -529,21 +525,31 @@ public class Interfaz {
 	
 	private boolean comprobarSumaFila(int fila) {
 		int suma = 0;
-
+		boolean ret1= true;
+		boolean ret2= true;
+		
 		for (int i = 0; i < constanteEsquina; i++) {
 			int imput = Integer.parseInt(cuadrilla[fila][i].getText() + "0");
 			suma = Logica.sumaNumeros(suma, imput / 10);
+			ret2 = ret2 && !cuadrilla[fila][i].getText().isEmpty();
 		}
-		return Logica.equalsNumeros(suma, Integer.parseInt(LabelSumaFila[fila].getText()));
+		ret1 = ret1 && Logica.equalsNumeros(suma, Integer.parseInt(LabelSumaFila[fila].getText()));
+		return ret1&&ret2;
 	}
 	
 	private boolean comprobarSumaColumna(int columna) {
 		int suma = 0;
+		boolean ret1= true;
+		boolean ret2= true;
+		
 		for (int i = 0; i < constanteEsquina; i++) {
 			int imput = Integer.parseInt(cuadrilla[i][columna].getText() + "0");
 			suma = Logica.sumaNumeros(suma, imput/10);
+			ret2 = ret2 && !cuadrilla[i][columna].getText().isEmpty();
 		}
-		return Logica.equalsNumeros(suma, Integer.parseInt(LabelSumaColu[columna].getText()));
+		
+		ret1 = ret1 && Logica.equalsNumeros(suma, Integer.parseInt(LabelSumaColu[columna].getText()));
+		return ret1&&ret2;
 	}
 	
 	private void pantallaJugadorGana() {
