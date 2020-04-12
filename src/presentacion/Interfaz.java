@@ -32,6 +32,7 @@ public class Interfaz {
     private JLabel imagen = new JLabel("");
     private JLabel lblTiempo = new JLabel("Tiempo");
     private JLabel lblMejorTiempo; 
+    private Color colorRosa=new Color(255, 77, 77);
 
     private int constanteXsumaFila=0;
     private int constanteYsumaFila=0;
@@ -297,7 +298,7 @@ public class Interfaz {
 						if (time.isRunning()) {
 							char caracter = e.getKeyChar();
 							// Verificar si la tecla pulsada no es un digito
-							if (((caracter < '1') || (caracter > '9')) && (caracter != '\b')) {
+							if (Logica.esUnNumuero(caracter)) {
 								e.consume(); // ignorar el evento de teclado
 							} else {
 								if (cuadrilla[a][b].getText().length() >= 1) // NO DEJA INGRESAR MAS DE UN DIGITO
@@ -364,6 +365,7 @@ public class Interfaz {
 		btnComenzar.setVisible(false);
         btnComenzar.addActionListener(new ActionListener() {       	
             public void actionPerformed(ActionEvent e) { 
+            	btnComenzar.setVisible(false);
             	Sonidos.sonidoBoton();
             	mostrarSumaColumnasFilas();
             	if(getTiempoActual()==0)
@@ -377,9 +379,14 @@ public class Interfaz {
 	private void botonRendir() {
 		btnRendir.setVisible(false);
         btnRendir.addActionListener(new ActionListener() {       	
-            public void actionPerformed(ActionEvent e) { 
+            public void actionPerformed(ActionEvent e) {
+            	if(time.isRunning()) {
+            	btnProbar.setVisible(false);
             	Sonidos.sonidoBoton();
             	rendirseYmostrarResolucion();
+            	btnRendir.setVisible(false);
+            	}
+
                 }
         });
         btnRendir.setBounds(420, 303, 106, 23);
@@ -391,7 +398,7 @@ public class Interfaz {
 			for (int i = 0; i < constanteEsquina; i++) {
 				for (int j = 0; j < constanteEsquina; j++) {
 				   cuadrilla[i][j].setText(cuadrilla[i][j].getName());
-				   cuadrilla[i][j].setBackground(Color.RED);
+				   cuadrilla[i][j].setBackground(colorRosa);
 				}
 				time.stop();
 			}
@@ -425,7 +432,9 @@ public class Interfaz {
 		btnReiniciar.setVisible(false);
 		btnReiniciar.addActionListener(new ActionListener() {       	
             public void actionPerformed(ActionEvent e) { 
-            
+            	Logica.filas.clear();
+                Logica.columnas.clear();
+                        
             	for (int i = 0; i < constanteEsquina; i++) {
         			for (int j = 0; j < constanteEsquina; j++) {
         				cuadrilla[i][j].setVisible(false);
@@ -457,6 +466,9 @@ public class Interfaz {
 	}
 	
 
+	
+	
+	
 	private void botonProbar() {
 		btnProbar.setVisible(false);
 		btnProbar.setBounds(266, 303, 89, 23);
@@ -466,10 +478,11 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent e) {
 				pantallaJugadorGana();
 				Sonidos.sonidoBoton();
-				Logica.compararRecords(tiempoActual);
+				
 
 				if (time.isRunning()) {
 					if (comprobarVictoria()) {
+						Logica.compararRecords(tiempoActual);
 						for (int i = 0; i < constanteEsquina; i++) {
 							pintarColu(i, Color.GREEN);
 							pintarFila(i, Color.GREEN);
@@ -479,12 +492,12 @@ public class Interfaz {
 						setTiempoActual(tiempoActual + 10);
 
 						for (int i = 0; i < constanteEsquina; i++) {
-							if (comprobarFila(i)) {
+							if (comprobarSumaFila(i)) {
 								pintarFila(i, Color.GREEN);
 							} else {
 								pintarFila(i, Color.WHITE);
 							}
-							if (comprobarColumna(i)) {
+							if (comprobarSumaColumna(i)) {
 								pintarColu(i, Color.GREEN);
 							} else {
 								pintarColu(i, Color.WHITE);
@@ -504,17 +517,17 @@ public class Interfaz {
 		LabelSumaColu[columna].setForeground(c);
 	}
 	
-	private boolean comprobarVictoria() {// COMPRUEBA SI TODOS LOS TEXTFIELD SON VERDES
+	private boolean comprobarVictoria() {// COMPRUEBA SI TODAS LAS COLUMNAS Y FILAS SON CORRECTAS
         boolean ret = true;
         for (int i = 0; i < constanteEsquina; i++) {
         	for(int j=0;j<constanteEsquina;j++) {
-        		ret=ret&&(comprobarFila(i)&&comprobarColumna(j));
+        		ret=ret&&(comprobarSumaFila(i)&&comprobarSumaColumna(j));
         	}   
         }
         return ret;
     }
 	
-	private boolean comprobarFila(int fila) {
+	private boolean comprobarSumaFila(int fila) {
 		int suma = 0;
 
 		for (int i = 0; i < constanteEsquina; i++) {
@@ -524,7 +537,7 @@ public class Interfaz {
 		return Logica.equalsNumeros(suma, Integer.parseInt(LabelSumaFila[fila].getText()));
 	}
 	
-	private boolean comprobarColumna(int columna) {
+	private boolean comprobarSumaColumna(int columna) {
 		int suma = 0;
 		for (int i = 0; i < constanteEsquina; i++) {
 			int imput = Integer.parseInt(cuadrilla[i][columna].getText() + "0");

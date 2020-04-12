@@ -81,6 +81,19 @@ public class Logica {
 		}	
 	}
 	
+
+	
+	public static boolean esUnNumuero(char c) {
+		return    ((c < '1') || (c > '9')) && (c != '\b');
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void guardarRecords(String recordnuevo) {
 		File archivotxt = new File("src/negocio/listaRecords.txt");
 
