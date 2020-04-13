@@ -1,12 +1,10 @@
 package multimedia;
-
 import java.io.File;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Sonidos {
-	
 	
 	//SONIDO PARA LA INTERFA (EN CASO DE QUE NO ENCUENTRE EL ARCHIVO DE SONIDO, TIRA UNA EXCEPCION)
 	public static void sonidoInterfaz()

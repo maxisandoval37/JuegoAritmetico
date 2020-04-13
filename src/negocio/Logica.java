@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class Logica {
 
 	
-	public static HashMap<Integer,Integer> filas = new HashMap<Integer,Integer>();//<POSICION,SUMA>
-	public static HashMap<Integer,Integer> columnas = new HashMap<Integer,Integer>();//<POSICION,SUMA>
+	public static HashMap<Integer,Integer> Sumafilas = new HashMap<Integer,Integer>();//<POSICION,SUMA>
+	public static HashMap<Integer,Integer> Sumacolumnas = new HashMap<Integer,Integer>();//<POSICION,SUMA>
 	
 	
 	public static boolean facil = false;
@@ -21,33 +21,33 @@ public class Logica {
 	}
 	
 	public static void calcularSumaFila (int numFila, int sumar) {
-		int sumaAuxFila = filas.get(numFila);
-		filas.put(numFila, sumaAuxFila + sumar);
+		int sumaAuxFila = Sumafilas.get(numFila);
+		Sumafilas.put(numFila, sumaAuxFila + sumar);
 	}
 
 	//SUMA POR COLUMNAS Y AGREGA EL RESULTADO AL MAP
 	public static void calcularSumaColu(int numColu, int sumar) {
-		if (columnas.containsKey(numColu)) {
-			int sumaAuxColu = columnas.get(numColu);
-		columnas.put(numColu, sumaAuxColu + sumar);
+		if (Sumacolumnas.containsKey(numColu)) {
+			int sumaAuxColu = Sumacolumnas.get(numColu);
+		Sumacolumnas.put(numColu, sumaAuxColu + sumar);
 		} else
-			columnas.put(numColu, sumar);
+			Sumacolumnas.put(numColu, sumar);
 	}
 
 	public static HashMap<Integer, Integer> getFilas() {
-		return filas;
+		return Sumafilas;
 	}
 
 	public static void setFilas(HashMap<Integer, Integer> filas) {
-		Logica.filas = filas;
+		Logica.Sumafilas = filas;
 	}
 
 	public static HashMap<Integer, Integer> getColumnas() {
-		return columnas;
+		return Sumacolumnas;
 	}
 
 	public static void setColumnas(HashMap<Integer, Integer> columnas) {
-		Logica.columnas = columnas;
+		Logica.Sumacolumnas = columnas;
 	}
 	
 	public static boolean equalsNumeros (int a, int b) {
@@ -59,15 +59,10 @@ public class Logica {
 	}
 	
 	
-	
-
-	
 	public static boolean esUnNumuero(char c) {
 		return    ((c < '1') || (c > '9')) && (c != '\b');
 	}
 	
-	
-
 	
 	
 }

@@ -84,12 +84,9 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent e) {
 				Record.abrirArchivoYCopiar("src/negocio/RecordFacil.txt");
 				Logica.facil = true;
-				Logica.normal = false;
-				Logica.dificil = false;
-
 				Sonidos.sonidoBoton();
-
 				constanteEsquina = 3;
+				
 				determinarPosicionDeLasSuma(185,50,50,185);
 				crear();
 				ocultarBotones();
@@ -106,8 +103,6 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent e) {
 				Record.abrirArchivoYCopiar("src/negocio/RecordNormal.txt");
 				Logica.normal = true;
-				Logica.facil = false;
-				Logica.dificil = false;
 				Sonidos.sonidoBoton();
 				constanteEsquina = 4;
 		
@@ -128,8 +123,6 @@ public class Interfaz {
 
 				Record.abrirArchivoYCopiar("src/negocio/RecordDificil.txt");
 				Logica.dificil = true;
-				Logica.facil = false;
-				Logica.normal = false;
 				Sonidos.sonidoBoton();
 				constanteEsquina = 5;
 				
@@ -425,19 +418,17 @@ public class Interfaz {
 		frame.getContentPane().add(lblMejorTiempo);
 	}
 
-	private void cambiarImagen(ImageIcon img) {
-		imagen.setIcon(img);
-		imagen.setBounds(0, 0, 567, 353);
-		frame.getContentPane().add(imagen);
-	}
-	
-	
 	private void botonReiniciar() { //////
 		btnReiniciar.setVisible(false);
 		btnReiniciar.addActionListener(new ActionListener() {       	
             public void actionPerformed(ActionEvent e) { 
-            	Logica.filas.clear();
-                Logica.columnas.clear();
+            	
+            	Logica.facil = false;
+            	Logica.normal = false;
+            	Logica.dificil = false;
+            	
+            	Logica.Sumafilas.clear();
+                Logica.Sumacolumnas.clear();
                         
             	for (int i = 0; i < constanteEsquina; i++) {
         			for (int j = 0; j < constanteEsquina; j++) {
@@ -509,6 +500,7 @@ public class Interfaz {
 			}
 		});
 	}
+	
 	// FIN BOTONES
 	private void pintarFila(int fila,Color f) {
 		LabelSumaFila[fila].setForeground(f);;
@@ -516,6 +508,12 @@ public class Interfaz {
 	
 	private void pintarColu(int columna, Color c) {
 		LabelSumaColu[columna].setForeground(c);
+	}
+	
+	private void cambiarImagen(ImageIcon img) {
+		imagen.setIcon(img);
+		imagen.setBounds(0, 0, 567, 353);
+		frame.getContentPane().add(imagen);
 	}
 	
 	private void rendirseYmostrarResolucion() {
@@ -586,13 +584,11 @@ public class Interfaz {
 	}
 
 
-	public void resolver () {
+	public void resolver () {//aux, para que el programador vea las respuestas del juego
 		for (int i = 0;i<constanteEsquina;i++) {
 			for (int j = 0;j<constanteEsquina;j++) {
 				System.out.println(cuadrilla[i][j].getName());
-				
 			}
 		}
-
 	}
 }
