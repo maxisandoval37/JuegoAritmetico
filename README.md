@@ -4,7 +4,7 @@ El juego consiste en completar los casilleros con los números necesarios para l
 
 [![TUTO](https://i.ibb.co/56vhCJZ/0-tuto.png)](https://www.youtube.com/embed/ARYf7cvr4YQ?controls=0)
 
-![interfaz](https://s8.gifyu.com/images/000a8befcc9103f51cd.gif)
+<img src="/tuto example.gif?raw=true">
 
 ![interfaz](https://i.ibb.co/yY16jj0/1.png)
 
