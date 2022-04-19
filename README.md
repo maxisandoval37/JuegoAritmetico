@@ -6,14 +6,14 @@ El juego consiste en completar los casilleros con los números necesarios para l
 
 <img src="/tuto example.gif?raw=true">
 
-![interfaz](https://i.ibb.co/yY16jj0/1.png)
+<img src="https://i.ibb.co/yY16jj0/1.png">
 
-![interfaz](https://i.ibb.co/103SWJ2/2.png)
+<img src="https://i.ibb.co/103SWJ2/2.png">
 
-![interfaz](https://i.ibb.co/jDycH2Z/3.png)
+<img src="https://i.ibb.co/jDycH2Z/3.png">
 
-![interfaz](https://i.ibb.co/qjy5kTC/4.png)
+<img src="https://i.ibb.co/qjy5kTC/4.png">
 
-![interfaz](https://i.ibb.co/1ZJpDhz/5.png)
+<img src="https://i.ibb.co/1ZJpDhz/5.png">
 
-![interfaz](https://i.ibb.co/0qMMdM2/6.png)
+<img src="https://i.ibb.co/0qMMdM2/6.png">
